@@ -1,7 +1,7 @@
 # SmartBath.py
 # Software per rendere smarth lo scaldabagno elettrico, con l'uso di Blynk e la libreria
 # https://github.com/vshymanskyy/blynk-library-python
-# La libreria è salvata in /lib/BlynkLib.py 
+# La libreria "BlynkLib.py" è salvata in /lib/BlynkLib.py 
 
 import BlynkLib
 import network
@@ -12,16 +12,17 @@ import utime
 WIFI_SSID = 'myssd'
 WIFI_PASS = 'mypassword'
 BLYNK_AUTH = 'mytoken'
+
 #il modulo a 4 rele' viene comandato in NPN quindi con pin a livello basso si accendono i rele
 v_on = 0
 v_off = 1
 
 # pins declaration
 ventola = machine.Pin(0, machine.Pin.OUT) #V0 - D3
-w1000 = machine.Pin(5, machine.Pin.OUT) #V1 - D1
-w2000 = machine.Pin(4, machine.Pin.OUT) #V2 - D2
+w1000 = machine.Pin(5, machine.Pin.OUT) #V1 - D1 -- Prima resistenza da 1000W
+w2000 = machine.Pin(4, machine.Pin.OUT) #V2 - D2 -- Seconda resistenza da 1000W
 
-start_button = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_UP) #D5
+start_button = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_UP) #D5 -- Pulsante per accendere e spegnere
 
 w1000.value(v_off)
 w2000.value(v_off)
@@ -29,7 +30,7 @@ ventola.value(v_off)
 
 tempo = machine.Timer(-1)
 
-status = 0 # dichiaro delle variabili per tenere traccia dello stato dei pin
+status = 0 # variabile che tiene traccia dello stato dei pin
 
 wifi = network.WLAN(network.STA_IF)
 wifi.active(True)
